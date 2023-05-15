@@ -1,0 +1,19 @@
+- jest napisana w najnowszym symfony (LTS).
+- wykorzystujemy PHP8.
+- mogę zarejestrować się (nie jest wymagane potwierdzenie konta) oraz zalogować. 
+- zalogowany użytkownik może mieć wiele list TODO (każda lista ma swoją nazwę)
+- każda lista TODO może mieć wiele pozycji na liście.
+- każda pozycja ma checkbox (wykonane/nie wykonane) oraz jakąś swoją nazwę.
+- mogę zaznaczyć na liście, że dana pozycja jest wykonana.
+- zadanie jest przesłane do nas przez serwis GITLAB
+
+Proszę o wykonanie zadania max do soboty (20 maja).
+
+TodoList:
+name
+user_id
+
+TodoItem:
+todo_list_id
+name
+done

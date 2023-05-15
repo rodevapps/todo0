@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Todo Item{% endblock %}
+
+{% block body %}
+<div>
+    <a href="{{ path('home') }}"><button>Back to Home Page</button></a>
+</div>
+
+<h3>New Todo Item</h3>
+
+{{ form(form) }}
+
+<style>
+label {
+    margin-right: 10px;
+
+}
+button[type="submit"] {
+    margin-top: 10px;
+}
+</style>
+{% endblock %}

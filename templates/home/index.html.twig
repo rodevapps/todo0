@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Todo App{% endblock %}
+
+{% block body %}
+<div>
+    <a href="{{ path('todolist_new') }}"><button>Add new TODO list</button></a>
+</div>
+
+<h3>My TODO lists</h3>
+
+<ul style="list-style: none;">
+    {% for todoList in todoLists %}
+        <li style="margin-top: 20px;"><strong>{{ todoList.name }}</strong> <form action="{{ path('todoitem_new') }}" method="post"><input type="hidden" name="add_todo_item_form[todoListId]" value="{{ todoList.id }}"><input type="submit" value="&#43" /></form></li>
+
+        <ul style="list-style: none;">
+            {% for todoItem in todoList.todoItems %}
+                <li><form action="{{ path('todoitem_update') }}" method="post"><input type="hidden" name="id" value="{{ todoItem.id }}" /><input type="checkbox" name="done"{% if todoItem.done %} checked="checked"{% endif %} /> {{ todoItem.name }} <input type="submit" value="Update" /></form></li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
+<style>
+form {
+    display: inline;
+}
+</style>
+{% endblock %}
