@@ -9,7 +9,12 @@
 
 <h3>New Todo Item</h3>
 
-{{ form(form) }}
+{{ form_start(form) }}
+    <input type="hidden" name="add_todo_item_form[todoListId]" value="{{ id }}">
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.save) }}
+{{ form_end(form) }}
 
 <style>
 label {

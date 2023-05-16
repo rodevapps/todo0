@@ -11,7 +11,7 @@
 
 <ul style="list-style: none;">
     {% for todoList in todoLists %}
-        <li style="margin-top: 20px;"><strong>{{ todoList.name }}</strong> <form action="{{ path('todoitem_new') }}" method="post"><input type="hidden" name="add_todo_item_form[todoListId]" value="{{ todoList.id }}"><input type="submit" value="&#43" /></form></li>
+        <li style="margin-top: 20px;"><strong>{{ todoList.name }}</strong> <form action="{{ path('todoitem_new') }}" method="post"><input type="hidden" name="add_todo_item_form[todoListId]" value="{{ todoList.id }}"><input type="hidden" name="first_form" value="1"><input type="submit" value="&#43" /></form></li>
 
         <ul style="list-style: none;">
             {% for todoItem in todoList.todoItems %}

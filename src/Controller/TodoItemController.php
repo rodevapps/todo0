@@ -53,21 +53,23 @@ class TodoItemController extends AbstractController
 
         $form = $this->createForm(AddTodoItemFormType::class, $todoItem);
 
-        $form->handleRequest($request);
+        if ($request->request->get('first_form') !== "1") {
+            $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) {
-            $todoItem = $form->getData();
-            $todoItem->setDone(false);
-
-            $entityManager->persist($todoItem);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'New Todo Item created successfully!');
-
-            return $this->redirectToRoute('home');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $todoItem = $form->getData();
+                $todoItem->setDone(false);
+    
+                $entityManager->persist($todoItem);
+                $entityManager->flush();
+    
+                $this->addFlash('success', 'New Todo Item created successfully!');
+    
+                return $this->redirectToRoute('home');
+            }
         }
 
-        return $this->renderForm('todoitem/new.html.twig', ['form' => $form]);
+        return $this->renderForm('todoitem/new.html.twig', ['form' => $form, 'id' => $id['todoListId']]);
     }
 
     #[Route('/todo-items/update', name: 'todoitem_update', methods: ["POST"])]

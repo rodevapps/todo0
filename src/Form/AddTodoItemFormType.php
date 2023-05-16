@@ -3,18 +3,12 @@
 namespace App\Form;
 
 use App\Entity\TodoItem;
-use App\Entity\TodoList;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Positive;
-use Symfony\Component\Form\Event\PreSubmitEvent;
 
 class AddTodoItemFormType extends AbstractType
 {
@@ -24,20 +18,6 @@ class AddTodoItemFormType extends AbstractType
             new NotBlank(['message' => 'Please enter a task list item name'])
         ]]);
 
-        $builder->add('todoListId', HiddenType::class, ['constraints' => [
-            new NotBlank(['message' => 'Please enter a task list id']), new Positive()
-        ]]);
-
-        /*
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (PreSubmitEvent $event) {
-            $form = $event->getForm();
-            $form->remove("todoListId");
-            $form->add("todoListId", EntityType::class,
-                ['class' => TodoList::class, 'multiple' => false, 'expanded' => false, 'choice_label' => "getName"]
-            );
-        });
-        */
-
         $builder->add('save', SubmitType::class);
     }
 
@@ -45,6 +25,7 @@ class AddTodoItemFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => TodoItem::class,
+            'allow_extra_fields' => true
         ]);
     }
 }
